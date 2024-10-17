@@ -37,6 +37,33 @@ spec:
             capabilities: 
                 add: ["MAC_ADMIN"]
 ```
+#### ServiceAccounts
+User account is used by humans, service account is used by applications.
+SA creates a secret with the token that you have to use from the applications in the header "Autorization: Bearer token"
+- kubectl commands
+```bash
+k create serviceaccount name
+k describe serviceaccount name #to get the related secret name with the token
+k create token sa-name # From 1.24 the token is not auto-generated and now is time bound
+```
+#### Resource Request
+```yaml
+...
+kind: Pod
+...
+spec:
+  containers:
+  - name:
+    resources:
+      requests:
+        memory: "4Gi"
+        cpu: 2
+      limits:
+        memory:
+        cpu:
+```
+- Memory: M/G/K/Gi/Mi/Ki
+- CPU: 1/100m
 
 ## Docker
 #### Users
