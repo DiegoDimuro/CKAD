@@ -86,6 +86,26 @@ spec:
         cpu:
 ```
 
+#### Taints and Tolerations
+Nodes have taints and Pods have tolerations to certain taints. 
+If both match, the scheduler place the pod in the node.
+```bash
+kubectl describe node node-name | grep Taint
+kubectl taint nodes node-name key=value:taint-effect
+# tain-effect can be NoSchedule | PreferNoSchedule | NoExecute
+```
+```yaml
+...
+kind: Pod
+...
+spec:
+  tolerations:
+  - key: "key"
+    operator: "equal"
+    value: "value"
+    effect: "taint-effect"
+```
+
 ## Docker
 #### Users
 - When running the container
